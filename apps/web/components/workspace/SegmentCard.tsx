@@ -34,6 +34,7 @@ export const SegmentCard: React.FC<SegmentCardProps> = ({
   const updateSegmentMarker = useProjectStore((s) => s.updateSegmentMarker);
   const playSegment = usePlayerStore((s) => s.playSegment);
   const seek = usePlayerStore((s) => s.seek);
+  const targetLanguage = useProjectStore((s) => s.currentProject?.targetLanguage) || 'Dub';
 
   const [text, setText] = useState(segment.punjabiText || '');
   const [showNote, setShowNote] = useState(!!segment.note);
@@ -185,11 +186,11 @@ export const SegmentCard: React.FC<SegmentCardProps> = ({
         </button>
       </div>
 
-      {/* Punjabi Adaptation Script Editor */}
+      {/* Target Language Adaptation Script Editor */}
       <div className="mb-2">
         <div className="flex items-center justify-between mb-1">
           <label className="text-[10px] font-bold tracking-wider text-indigo-700 uppercase">
-            Punjabi Script (Shahmukhi / Gurmukhi / Roman)
+            {targetLanguage} Script
           </label>
           <span className="text-[10px] text-slate-400">{text.length} chars</span>
         </div>
@@ -197,7 +198,7 @@ export const SegmentCard: React.FC<SegmentCardProps> = ({
           rows={2}
           value={text}
           onChange={handleTextChange}
-          placeholder="Oye tu ethe ki kari jana ain?..."
+          placeholder={`Write your adapted line in ${targetLanguage}...`}
           onClick={(e) => e.stopPropagation()}
           className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 resize-none font-medium transition leading-snug"
         />
@@ -226,7 +227,7 @@ export const SegmentCard: React.FC<SegmentCardProps> = ({
               type="button"
               onClick={handlePlayRecording}
               className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 rounded-md transition"
-              title="Preview latest Punjabi recording"
+              title={`Preview latest ${targetLanguage} recording`}
             >
               <Play className="w-3 h-3" />
               <span>{isPlayingAudio ? 'Playing...' : `Play (v${activeRecording.version})`}</span>

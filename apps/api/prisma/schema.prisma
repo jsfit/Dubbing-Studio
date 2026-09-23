@@ -12,6 +12,7 @@ model Project {
   name           String
   description    String?
   sourceLanguage String              @default("en")
+  targetLanguage String              @default("Punjabi")
   whisperModel   String              @default("small")
   device         String              @default("auto")
   createdAt      DateTime            @default(now())

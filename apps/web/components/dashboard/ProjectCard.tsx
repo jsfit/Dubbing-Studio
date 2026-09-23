@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Play, Clock, Film, Trash2, ArrowRight } from 'lucide-react';
+import { Clock, Film, Trash2, ArrowRight, Globe } from 'lucide-react';
 import type { Project } from '@pds/shared';
 
 interface ProjectCardProps {
@@ -27,7 +27,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onDelete }) =
   return (
     <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
       <div>
-        <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
               <Film className="w-5 h-5" />
@@ -56,11 +56,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onDelete }) =
           </button>
         </div>
 
+        {/* Language Pill */}
+        <div className="flex items-center gap-1.5 my-2">
+          <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md">
+            <Globe className="w-3 h-3" />
+            Dub: {project.targetLanguage || 'Dubbed'}
+          </span>
+          <span className="text-[11px] text-slate-400">from {project.sourceLanguage.toUpperCase()}</span>
+        </div>
+
         {project.description && (
-          <p className="text-xs text-slate-600 mb-4 line-clamp-2">{project.description}</p>
+          <p className="text-xs text-slate-600 mb-3 line-clamp-2">{project.description}</p>
         )}
 
-        <div className="grid grid-cols-2 gap-2 my-4 bg-slate-50 p-3 rounded-lg border border-slate-100 text-xs">
+        <div className="grid grid-cols-2 gap-2 my-3 bg-slate-50 p-3 rounded-lg border border-slate-100 text-xs">
           <div>
             <span className="text-slate-400 block text-[11px]">Duration</span>
             <span className="font-medium text-slate-700 flex items-center gap-1 mt-0.5">

@@ -55,7 +55,7 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
         </div>
 
         <div className="px-6 py-3 bg-slate-50 border-t border-slate-100 text-[11px] text-slate-500 text-center">
-          Shortcuts are safely disabled when you are typing inside the Punjabi script editor.
+          Shortcuts are safely disabled when you are typing inside the script editor.
         </div>
       </div>
     </div>

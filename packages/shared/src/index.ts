@@ -34,7 +34,7 @@ export interface TranscriptSegment {
   start: number;
   end: number;
   originalText: string;
-  punjabiText: string;
+  punjabiText: string; // Database field for target dub text
   status: SegmentStatus;
   note?: string | null;
   marker?: PunchlineMarker | null;
@@ -70,6 +70,7 @@ export interface Project {
   name: string;
   description?: string | null;
   sourceLanguage: string;
+  targetLanguage: string;
   whisperModel: string;
   device: string;
   createdAt: string;
@@ -92,12 +93,13 @@ export interface CreateProjectPayload {
   name: string;
   description?: string;
   sourceLanguage?: string;
+  targetLanguage?: string;
   whisperModel?: string;
   device?: string;
 }
 
 export interface UpdateSegmentPayload {
-  punjabiText?: string;
+  punjabiText?: string; // target dub line
   originalText?: string;
   start?: number;
   end?: number;
@@ -108,7 +110,8 @@ export interface UpdateSegmentPayload {
 
 export interface RenderOptionsPayload {
   originalAudioVolume?: number; // 0 to 1, default 0
-  punjabiVoiceVolume?: number;  // 0 to 2, default 1
+  voiceVolume?: number;         // 0 to 2, default 1
+  punjabiVoiceVolume?: number;  // alias for backward compatibility
   musicVolume?: number;         // 0 to 1, default 0.15
   sfxVolume?: number;           // 0 to 1, default 0.8
   normalizeLoudness?: boolean;  // default true (-16 LUFS)

@@ -1,6 +1,6 @@
-# 🎙️ Punjabi Dubbing Studio (PDS)
+# 🎙️ Dubbing Studio
 
-> **A local-first, professional desktop workstation for manually creating hilarious and natural Punjabi dubs of videos.**
+> **A local-first, professional desktop workstation for manually creating natural, hilarious, and authentic video dubs in ANY language.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-23%2B-brightgreen.svg)](https://nodejs.org)
@@ -8,15 +8,25 @@
 [![Fastify](https://img.shields.io/badge/Fastify-5-000000.svg)](https://fastify.io)
 [![FFmpeg](https://img.shields.io/badge/FFmpeg-6.0%2B-007808.svg)](https://ffmpeg.org)
 [![Theme: Light](https://img.shields.io/badge/Theme-Light_Only-indigo.svg)](#design-system)
+[![White-Label: Multi-Language](https://img.shields.io/badge/Languages-Universal_%26_Custom-purple.svg)](#multi-language-support)
 
-Punjabi Dubbing Studio is engineered specifically for comedic content creators and voice actors. Instead of fighting complex, generic video editors like Premiere Pro or CapCut, PDS optimizes for the exact dubbing loop: **Watch → Script → Speak → Accept → Advance → Render**.
+Dubbing Studio is a white-labeled, universal video dubbing workstation engineered specifically for comedic creators, translators, localization teams, and voice actors. Instead of fighting complex, bloated timeline video editors like Premiere Pro or CapCut, Dubbing Studio optimizes for the exact dubbing loop: **Watch → Script → Speak → Accept → Advance → Render**.
+
+---
+
+## 🌍 Universal Multi-Language Support
+
+Dubbing Studio is **fully language-agnostic**:
+* **Any Source Language**: Transcribe English, Spanish, Japanese, French, German, Chinese, Hindi, Arabic, or auto-detect with Whisper.
+* **Any Target Dubbing Language**: Dub into Spanish, Punjabi, Hindi, French, German, Japanese, Arabic, English, Italian, Portuguese, Korean, or **type your own custom dialect or language**.
+* **Any Writing Script**: Full Unicode support for Latin alphabets, Cyrillic, Arabic/Persian/Shahmukhi, Devanagari, Gurmukhi, Kanji/Hiragana/Katakana, Hangul, etc.
 
 ---
 
 ## 💡 Core Philosophy
 
-* **Human Delivery Over AI Voices**: This is **not** an AI voice cloning or synthetic TTS tool. Comedy lives in nuance, pitch, vocal slang, and pauses. The user writes their own Punjabi adaptation and records their own voice.
-* **Local-First & Private**: Videos, voice recordings, and project files never leave your machine. No cloud uploads, no monthly credits, and no telemetry.
+* **Human Delivery Over AI Voices**: This is **not** an AI voice cloning or synthetic TTS tool. True comedic timing and emotional delivery live in human nuance, pitch, vocal slang, and pauses. The user writes their own localized adaptation and records their own voice.
+* **Local-First & Private**: Videos, voice recordings, and project files never leave your machine. No cloud uploads, no monthly credit limits, and no telemetry.
 * **Strict Light Studio Aesthetics**: Designed with a clean, high-contrast Light Theme (`#f8fafc` canvas, pure `#ffffff` cards, slate borders, and vibrant status chips) optimized for clarity during long dubbing sessions.
 * **Zero-Friction Keyboard Flow**: Dub an entire video using keyboard shortcuts (`Space`, `R`, `P`, `Enter`, `Esc`, Arrow keys) without reaching for the mouse.
 
@@ -44,8 +54,8 @@ ffprobe -version
 
 Clone the repository and install all workspace dependencies:
 ```bash
-git clone https://github.com/your-username/ascend_master.git punjabi-dubbing-studio
-cd punjabi-dubbing-studio
+git clone https://github.com/your-username/ascend_master.git dubbing-studio
+cd dubbing-studio
 
 # Install monorepo dependencies
 npm install
@@ -79,39 +89,40 @@ npm run dev
 
 ## 🎬 Step-by-Step Example Walkthrough
 
-Here is a real example demonstrating how to dub a video with Punjabi Dubbing Studio:
+Here is a real example demonstrating how to dub a video into **any language** (e.g. Spanish or Punjabi):
 
 ```
 +-----------------------------------------------------------------------------------+
-| Punjabi Dubbing Studio                                             [Render Video] |
+| Dubbing Studio  [Dub: Spanish]                                     [Render Video] |
 |----------------------------------------+------------------------------------------|
 |                                        | Segment #001 (00:00.0 -> 00:03.2)        |
 |                                        |                                          |
-|                VIDEO                   | ORIGINAL                                 |
+|                VIDEO                   | ORIGINAL DIALOGUE                        |
 |         [ 640 x 360 Player ]           | "What did you just do to the vase?!"     |
 |                                        |                                          |
-|  [> Play]  [00:01.2 / 00:06.0]  [1.0x] | PUNJABI SCRIPT                           |
+|  [> Play]  [00:01.2 / 00:06.0]  [1.0x] | SPANISH SCRIPT                           |
 |----------------------------------------| +--------------------------------------+ |
-| Recording Station: Ready               | | Oye tu phuldaan da ki hashar kar     | |
-| [ Countdown: 2s ] [Record Line (R)]    | | ditta ae kamal deya siriya?!         | |
+| Recording Station: Ready               | | ¡¿Pero qué le acabas de hacer al     | |
+| [ Countdown: 2s ] [Record Line (R)]    | | jarrón, pedazo de monstruo?!         | |
 |----------------------------------------| +--------------------------------------+ |
 | Waveform: Dual Timing Comparison       | Mood: 😂 Punchline                       |
 | Original:  ||||||||||.....||||||       | [> Play Orig] [🎙 Re-record] [✓ Approved] |
 +-----------------------------------------------------------------------------------+
 ```
 
-### Step 1: Create a Project & Upload Video
+### Step 1: Create a Project & Pick Your Languages
 1. Open [http://localhost:3000](http://localhost:3000) and click **+ New Project**.
-2. Enter a project title (e.g., `Funny Cat Investigation #01`).
+2. Enter a project title (e.g., `Funny Cat Investigation - Spanish Dub`).
 3. Drag & drop your video file (MP4, WebM, MOV, or MKV).
-4. Select your Whisper transcription model (`small` recommended) and transcription language (`English`).
-5. Click **Create Project**. The backend extracts audio (16kHz WAV), probes video metadata with `ffprobe`, runs Whisper transcription, and splits the video into sentence-level segments.
+4. Choose **Original Audio Language** (e.g. `English` or `Auto-detect`).
+5. Choose **Target Dubbing Language** (e.g. `Spanish`, `French`, `German`, `Punjabi`, `Hindi`, `Japanese`, or select `Custom` to enter any dialect).
+6. Click **Create Project**. The backend extracts audio (16kHz WAV), probes video metadata with `ffprobe`, runs Whisper transcription, and splits the video into sentence-level segments.
 
-### Step 2: Write Punjabi Dialogue
+### Step 2: Write Your Localized Dialogue
 Inside the workstation, select any segment to jump the video directly to its start time:
 * **Original English Dialogue**: *"What are you doing here?"*
-* **Adapted Punjabi Line**: Type `Oye tu ethe kadi de chaul kaddan dya ain?`
-* Supported in **Shahmukhi** (پنجابی), **Gurmukhi** (ਪੰਜਾਬੀ), or **Roman Punjabi**.
+* **Adapted Spanish Line**: `¡¿Pero qué estás haciendo tú aquí?!`
+* **Adapted Punjabi Line**: `Oye tu ethe kadi de chaul kaddan dya ain?`
 * Add optional mood markers: `😂 Punchline`, `😡 Angry`, `😱 Shock`, or `😎 Sarcastic`.
 * Changes auto-save automatically in the background.
 
@@ -119,12 +130,12 @@ Inside the workstation, select any segment to jump the video directly to its sta
 1. Press `R` (or click **Record Line**).
 2. A 2-second visual countdown (`3.. 2.. 1..`) prepares your delivery.
 3. Original video plays with audio automatically ducked (to 20% or muted) so you hear original pacing without microphone bleed.
-4. Speak your Punjabi line into your microphone.
+4. Speak your adapted line into your microphone.
 5. Recording automatically stops at the segment boundary (Guided mode).
 
 ### Step 4: Preview & Compare Waveforms
 1. Listen back to your recording preview.
-2. Inspect the **Audio Waveform Comparison** panel: see your Punjabi speech waveform aligned against the original dialogue timing.
+2. Inspect the **Audio Waveform Comparison** panel: see your recorded speech waveform aligned against the original dialogue timing.
 3. If delivery was great, press `Enter` to **Accept** — the recording is stored versioned (`v1`), the segment turns green (`✓ Approved`), and the workstation automatically advances to the next unrecorded segment.
 4. If you flubbed a line, press `R` to instantly re-record. All versions are safely preserved in history.
 
@@ -133,7 +144,7 @@ Inside the workstation, select any segment to jump the video directly to its sta
 2. The pre-render validator checks for any missing recordings.
 3. Configure your mix:
    - **Original Dialogue Volume**: `0%` (replace completely) or `15%` (background ambient trace).
-   - **Punjabi Voice Volume**: `100%`.
+   - **Dubbed Voice Volume**: `100%`.
    - **Broadcast Loudness Normalization**: Enabled (`-16 LUFS` EBU R128).
 4. Click **Render Dubbed Video**.
 5. Watch the live Server-Sent Events (SSE) progress bar as FFmpeg mixes the audio with exact millisecond `adelay` alignment and muxes it with the original video.
@@ -153,14 +164,14 @@ Inside the workstation, select any segment to jump the video directly to its sta
 | <kbd>↑</kbd> or <kbd>←</kbd> | **Previous Segment** | Navigate to preceding dialogue line |
 | <kbd>↓</kbd> or <kbd>→</kbd> | **Next Segment** | Navigate to subsequent dialogue line |
 
-> *Note: Shortcuts are safely suspended while typing inside the Punjabi text area.*
+> *Note: Shortcuts are safely suspended while typing inside the script editor.*
 
 ---
 
 ## 🏗️ Architecture & Monorepo Structure
 
 ```
-punjabi-dubbing-studio/
+dubbing-studio/
 ├── packages/
 │   └── shared/                 # Shared TypeScript models and DTO interfaces
 │       ├── src/
@@ -214,14 +225,14 @@ punjabi-dubbing-studio/
 |---|---|---|
 | `GET` | `/health` | Service health status |
 | `GET` | `/api/projects` | List all projects with progress stats |
-| `POST` | `/api/projects` | Create a new dubbing project |
+| `POST` | `/api/projects` | Create a new dubbing project (source & target language) |
 | `GET` | `/api/projects/:id` | Fetch full project with video, segments, and recordings |
 | `DELETE` | `/api/projects/:id` | Delete project and clean up storage files |
 | `POST` | `/api/projects/:id/video` | Upload video file and trigger background extraction/transcription |
-| `PUT` | `/api/projects/:id/segments/:segmentId` | Update Punjabi text, timings, note, or comedy marker |
+| `PUT` | `/api/projects/:id/segments/:segmentId` | Update dub script text, timings, note, or comedy marker |
 | `POST` | `/api/projects/:id/segments` | Add a custom transcript segment manually |
 | `DELETE` | `/api/projects/:id/segments/:segmentId` | Delete a transcript segment |
-| `GET` | `/api/projects/:id/export/srt` | Download Punjabi subtitles in standard `.srt` format |
+| `GET` | `/api/projects/:id/export/srt` | Download subtitles in standard `.srt` format |
 | `POST` | `/api/projects/:id/segments/:segmentId/recording` | Upload user audio recording (creates next version) |
 | `PUT` | `/api/projects/:id/segments/:segmentId/recordings/:recId/active` | Switch active/approved recording version |
 | `POST` | `/api/projects/:id/render` | Trigger FFmpeg render with audio mix options |

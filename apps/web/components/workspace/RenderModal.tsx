@@ -134,7 +134,7 @@ export const RenderModal: React.FC<RenderModalProps> = ({
               <div>
                 <h3 className="font-bold text-slate-900 text-base">Dubbing Render Complete!</h3>
                 <p className="text-xs text-slate-600 mt-1">
-                  Your final Punjabi dubbed MP4 has been generated and synchronized with FFmpeg.
+                  Your final dubbed MP4 in {project.targetLanguage || 'your target language'} has been generated and synchronized with FFmpeg.
                 </p>
               </div>
 
@@ -236,14 +236,14 @@ export const RenderModal: React.FC<RenderModalProps> = ({
                     className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                   />
                   <span className="text-[10px] text-slate-400 block mt-0.5">
-                    Set to 0% to completely replace original speech with your Punjabi voice.
+                    Set to 0% to completely replace original speech with your {project.targetLanguage || 'dubbed'} voice.
                   </span>
                 </div>
 
-                {/* Punjabi voice volume */}
+                {/* Dubbed voice volume */}
                 <div>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="font-medium text-slate-700">Punjabi Voice Volume</span>
+                    <span className="font-medium text-slate-700">Dubbed Voice Volume ({project.targetLanguage || 'Voice'})</span>
                     <span className="font-mono text-slate-500">{Math.round(punjabiVoiceVolume * 100)}%</span>
                   </div>
                   <input

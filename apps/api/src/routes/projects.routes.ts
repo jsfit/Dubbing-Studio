@@ -14,6 +14,7 @@ export async function projectRoutes(app: FastifyInstance) {
       name: string;
       description?: string;
       sourceLanguage?: string;
+      targetLanguage?: string;
       whisperModel?: string;
       device?: string;
     };

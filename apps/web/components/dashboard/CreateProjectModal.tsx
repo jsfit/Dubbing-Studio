@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { X, Upload, Film, Cpu, Languages, Loader2 } from 'lucide-react';
+import { X, Upload, Film, Loader2 } from 'lucide-react';
 import { ApiClient } from '../../lib/api';
 
 interface CreateProjectModalProps {
@@ -9,6 +9,24 @@ interface CreateProjectModalProps {
   onClose: () => void;
   onCreated: (projectId: string) => void;
 }
+
+const COMMON_LANGUAGES = [
+  'English',
+  'Spanish',
+  'Punjabi',
+  'Hindi',
+  'French',
+  'German',
+  'Japanese',
+  'Chinese (Mandarin)',
+  'Arabic',
+  'Portuguese',
+  'Italian',
+  'Korean',
+  'Turkish',
+  'Russian',
+  'Urdu',
+];
 
 export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
   isOpen,
@@ -18,6 +36,9 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [sourceLanguage, setSourceLanguage] = useState('en');
+  const [targetLanguage, setTargetLanguage] = useState('Punjabi');
+  const [customTargetLanguage, setCustomTargetLanguage] = useState('');
+  const [isCustomLanguage, setIsCustomLanguage] = useState(false);
   const [whisperModel, setWhisperModel] = useState('small');
   const [device, setDevice] = useState('auto');
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -40,6 +61,10 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
       return;
     }
 
+    const finalTargetLanguage = isCustomLanguage
+      ? (customTargetLanguage.trim() || 'Dubbed')
+      : targetLanguage;
+
     setIsSubmitting(true);
     setError(null);
     setUploadStatus('Creating project...');
@@ -49,6 +74,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
         name,
         description,
         sourceLanguage,
+        targetLanguage: finalTargetLanguage,
         whisperModel,
         device,
       });
@@ -73,7 +99,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
               <Film className="w-4 h-4" />
             </div>
-            <h2 className="font-semibold text-slate-900 text-base">New Punjabi Dubbing Project</h2>
+            <h2 className="font-semibold text-slate-900 text-base">New Dubbing Project</h2>
           </div>
           <button
             type="button"
@@ -99,7 +125,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             <input
               type="text"
               required
-              placeholder="e.g. Funny Punjabi Dub #01"
+              placeholder="e.g. Comedy Scene #01 - Spanish Dub"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition"
@@ -147,7 +173,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Transcript Language
+                Original Audio Language
               </label>
               <select
                 value={sourceLanguage}
@@ -155,13 +181,65 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                 className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               >
                 <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="ja">Japanese</option>
                 <option value="pa">Punjabi</option>
                 <option value="hi">Hindi</option>
                 <option value="ur">Urdu</option>
+                <option value="ar">Arabic</option>
                 <option value="auto">Auto Detect</option>
               </select>
             </div>
 
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
+                Target Dubbing Language
+              </label>
+              {!isCustomLanguage ? (
+                <select
+                  value={targetLanguage}
+                  onChange={(e) => {
+                    if (e.target.value === '__custom__') {
+                      setIsCustomLanguage(true);
+                    } else {
+                      setTargetLanguage(e.target.value);
+                    }
+                  }}
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-medium"
+                >
+                  {COMMON_LANGUAGES.map((lang) => (
+                    <option key={lang} value={lang}>
+                      {lang}
+                    </option>
+                  ))}
+                  <option value="__custom__">+ Other / Custom Language...</option>
+                </select>
+              ) : (
+                <div className="flex items-center gap-1">
+                  <input
+                    type="text"
+                    autoFocus
+                    placeholder="Enter language..."
+                    value={customTargetLanguage}
+                    onChange={(e) => setCustomTargetLanguage(e.target.value)}
+                    className="w-full px-2.5 py-1.5 bg-slate-50 border border-indigo-400 rounded-lg text-xs text-slate-800 focus:outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setIsCustomLanguage(false)}
+                    className="p-1 text-slate-400 hover:text-slate-600 text-xs"
+                    title="Choose from list"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Whisper Model
@@ -178,21 +256,21 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                 <option value="large-v3">Large-v3 (Most Accurate)</option>
               </select>
             </div>
-          </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Transcription Device
-            </label>
-            <select
-              value={device}
-              onChange={(e) => setDevice(e.target.value)}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
-            >
-              <option value="auto">Auto (CUDA if available, else CPU)</option>
-              <option value="cuda">CUDA (NVIDIA GPU)</option>
-              <option value="cpu">CPU (Standard)</option>
-            </select>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
+                Transcription Device
+              </label>
+              <select
+                value={device}
+                onChange={(e) => setDevice(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              >
+                <option value="auto">Auto (CUDA if available, else CPU)</option>
+                <option value="cuda">CUDA (NVIDIA GPU)</option>
+                <option value="cpu">CPU (Standard)</option>
+              </select>
+            </div>
           </div>
 
           {isSubmitting && (

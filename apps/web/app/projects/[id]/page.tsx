@@ -140,6 +140,7 @@ export default function ProjectWorkspacePage({ params }: ProjectWorkspacePagePro
       {/* Top Studio Header */}
       <Header
         projectName={currentProject.name}
+        targetLanguage={currentProject.targetLanguage}
         saveStatus={isSaving ? 'Saving changes...' : saveStatusText}
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
         onOpenRender={() => setIsRenderOpen(true)}

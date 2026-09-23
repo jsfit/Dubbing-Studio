@@ -37,6 +37,7 @@ export const RecordingControls: React.FC = () => {
   } = useRecordingStore();
 
   const activeSegment = useProjectStore((s) => s.getActiveSegment());
+  const targetLanguage = useProjectStore((s) => s.currentProject?.targetLanguage) || 'Dub';
 
   const handlePlayPreview = () => {
     if (!previewAudioUrl) return;
@@ -52,7 +53,7 @@ export const RecordingControls: React.FC = () => {
           <div className="w-20 h-20 rounded-full bg-rose-50 border-2 border-rose-500 flex items-center justify-center text-rose-600 text-4xl font-extrabold shadow-lg animate-pulse mb-3">
             {countdown}
           </div>
-          <p className="text-xs font-semibold text-slate-700">Get Ready to Speak Punjabi...</p>
+          <p className="text-xs font-semibold text-slate-700">Get Ready to Speak {targetLanguage}...</p>
           <button
             type="button"
             onClick={cancelRecording}
@@ -86,7 +87,7 @@ export const RecordingControls: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
               </div>
               <p className="text-xs text-slate-600 font-medium">
-                Speak your Punjabi line now... (Auto-stops at segment end)
+                Speak your {targetLanguage} line now... (Auto-stops at segment end)
               </p>
             </div>
           </div>

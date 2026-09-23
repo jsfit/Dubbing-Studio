@@ -81,8 +81,9 @@ export async function segmentRoutes(app: FastifyInstance) {
       srtContent += `${text}\n\n`;
     });
 
+    const targetLang = ((project as { targetLanguage?: string }).targetLanguage || 'dubbed').toLowerCase();
     reply.header('Content-Type', 'text/plain; charset=utf-8');
-    reply.header('Content-Disposition', `attachment; filename="${project.name.replace(/\s+/g, '_')}_punjabi.srt"`);
+    reply.header('Content-Disposition', `attachment; filename="${project.name.replace(/\s+/g, '_')}_${targetLang}.srt"`);
     return reply.send(srtContent);
   });
 }

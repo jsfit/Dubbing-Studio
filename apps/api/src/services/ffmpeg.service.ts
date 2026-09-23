@@ -196,7 +196,7 @@ export class FFmpegService {
         delayedTags.push(`[${outTag}]`);
       });
 
-      let mixedVoiceTag = 'punjabi_mix';
+      let mixedVoiceTag = 'voice_mix';
       if (delayedTags.length === 1) {
         mixedVoiceTag = delayedTags[0].replace(/[[\]]/g, '');
       } else {

@@ -2,10 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Mic2, Film, Sparkles, HelpCircle } from 'lucide-react';
+import { Mic2, Film, HelpCircle } from 'lucide-react';
 
 interface HeaderProps {
   projectName?: string;
+  targetLanguage?: string;
   saveStatus?: string;
   onOpenShortcuts?: () => void;
   onOpenRender?: () => void;
@@ -15,6 +16,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   projectName,
+  targetLanguage,
   saveStatus,
   onOpenShortcuts,
   onOpenRender,
@@ -30,15 +32,17 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-bold text-slate-900 tracking-tight text-lg">Punjabi Dubbing Studio</span>
+              <span className="font-bold text-slate-900 tracking-tight text-lg">Dubbing Studio</span>
               <span className="px-2 py-0.5 text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-full">
                 Light Studio
               </span>
             </div>
             {projectName ? (
-              <p className="text-xs text-slate-500 font-medium truncate max-w-xs">{projectName}</p>
+              <p className="text-xs text-slate-500 font-medium truncate max-w-xs">
+                {projectName} {targetLanguage && <span className="text-indigo-600 font-semibold">• {targetLanguage} Dub</span>}
+              </p>
             ) : (
-              <p className="text-xs text-slate-400">Manual Video Dubbing Workstation</p>
+              <p className="text-xs text-slate-400">Universal Video Dubbing Workstation</p>
             )}
           </div>
         </Link>

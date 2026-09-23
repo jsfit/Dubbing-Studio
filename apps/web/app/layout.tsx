@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Punjabi Dubbing Studio — Professional Dubbing Workstation',
-  description: 'Local-first workstation for manually creating funny and natural Punjabi video dubs.',
+  title: 'Dubbing Studio — Multi-Language Professional Workstation',
+  description: 'Local-first workstation for manually creating natural video dubs in any language.',
 };
 
 export default function RootLayout({

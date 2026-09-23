@@ -12,6 +12,7 @@ export const WaveformComparison: React.FC = () => {
   const punjabiSurfer = useRef<WaveSurfer | null>(null);
 
   const activeSegment = useProjectStore((s) => s.getActiveSegment());
+  const targetLanguage = useProjectStore((s) => s.currentProject?.targetLanguage) || 'Dubbed';
   const currentTime = usePlayerStore((s) => s.currentTime);
 
   const activeRecording = activeSegment?.recordings?.find((r) => r.active || r.approved) || activeSegment?.recordings?.[0];
@@ -103,12 +104,12 @@ export const WaveformComparison: React.FC = () => {
       </div>
 
       <div className="space-y-2">
-        {/* Punjabi Voice Waveform */}
+        {/* Dubbed Voice Waveform */}
         <div className="bg-indigo-50/40 border border-indigo-100 rounded-xl p-3 flex flex-col justify-center">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-indigo-500" />
-              Punjabi Recording Waveform
+              {targetLanguage} Recording Waveform
             </span>
             {activeRecording && (
               <span className="text-[10px] text-slate-500 font-mono">

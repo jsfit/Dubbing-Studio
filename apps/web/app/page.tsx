@@ -60,11 +60,11 @@ export default function DashboardPage() {
               <span>Studio Workstation</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Create Hilarious & Natural Punjabi Dubs
+              Professional Multi-Language Video Dubbing Workstation
             </h1>
             <p className="text-slate-600 text-sm mt-2 leading-relaxed">
-              Import existing video clips, inspect sentence-level transcripts, write your own Punjabi adaptation,
-              record your voice line-by-line with guided timing, and export the finished MP4 with FFmpeg.
+              Import any video, inspect sentence-level transcripts, write your own voice adaptation in any language,
+              record line-by-line with guided timing, and render the final dubbed MP4 with FFmpeg.
             </p>
           </div>
 
